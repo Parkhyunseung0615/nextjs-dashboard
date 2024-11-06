@@ -10,7 +10,7 @@ import { useSearchParams } from 'next/navigation';
 export default async function InvoicesPage({
   searchParams,
 }: {
-  searchParams?: Promise<any>;
+  searchParams?: Promise<{ query?: string; page?: string }>;
 }) {
   const params = await searchParams;
   const query = params?.query || '';
