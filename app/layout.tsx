@@ -10,7 +10,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="ko">
-      <body className={pretendard.className}>{children}</body>
+      <body className={`${pretendard.className} overflow-hidden`}>
+        {children}
+      </body>
     </html>
   );
 }
