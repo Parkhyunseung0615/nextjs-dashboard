@@ -91,6 +91,7 @@ export async function fetchCardData() {
   }
 }
 
+// 페이지 당 보일 데이터 개수(limit)
 const ITEMS_PER_PAGE = 6;
 export async function fetchFilteredInvoices(
   query: string,

@@ -6,7 +6,15 @@ import Pagination from '@/app/ui/invoices/pagination';
 import { InvoicesTableSkeleton } from '@/app/ui/skeletons';
 import { Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
+import { fetchInvoicesPages } from '@/app/lib/data';
 
+// type 지정해서 사용도 가능
+// type Props = {
+//   searchParams?: Promise<{ query?: string; page?: string }>;
+// };
+// {searchParams}: {searchParams?: Props}
+
+// async 함수이므로 searchParams의 타입을 Promise로 잡아주고 제네릭으로 타입 전달
 export default async function InvoicesPage({
   searchParams,
 }: {
@@ -15,6 +23,9 @@ export default async function InvoicesPage({
   const params = await searchParams;
   const query = params?.query || '';
   const currentPage = Number(params?.page) || 1;
+
+  // 검색된 데이터 개수 기준 페이지 수
+  const totalPages = await fetchInvoicesPages(query);
 
   return (
     <div>
@@ -27,7 +38,7 @@ export default async function InvoicesPage({
         <Table query={query} currentPage={currentPage} />
       </Suspense>
       <div className="mt-5 flex w-full justify-center">
-        {/* <Pagination totalPages={totalPages} /> */}
+        <Pagination totalPages={totalPages} />
       </div>
     </div>
   );
