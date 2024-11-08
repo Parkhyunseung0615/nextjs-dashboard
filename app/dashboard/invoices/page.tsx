@@ -5,8 +5,12 @@ import Table from '@/app/ui/invoices/table';
 import Pagination from '@/app/ui/invoices/pagination';
 import { InvoicesTableSkeleton } from '@/app/ui/skeletons';
 import { Suspense } from 'react';
-import { useSearchParams } from 'next/navigation';
 import { fetchInvoicesPages } from '@/app/lib/data';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Invoices',
+};
 
 // type 지정해서 사용도 가능
 // type Props = {
