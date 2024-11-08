@@ -1,3 +1,4 @@
+'use client';
 import { deleteInvoice } from '@/app/lib/actions';
 import { PencilIcon, PlusIcon, TrashIcon } from '@heroicons/react/24/outline';
 import Link from 'next/link';
@@ -26,10 +27,15 @@ export function UpdateInvoice({ id }: { id: string }) {
 }
 
 export function DeleteInvoice({ id }: { id: string }) {
-  const deleteInvoiceWtihId = deleteInvoice.bind(null, id);
+  const deleteInvoiceWithId = deleteInvoice.bind(null, id);
+
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+    const result = await deleteInvoiceWithId();
+    console.log(result.message, e);
+  }
 
   return (
-    <form action={deleteInvoiceWtihId}>
+    <form action={deleteInvoiceWithId} onSubmit={handleSubmit}>
       <button type="submit" className="rounded-md border p-2 hover:bg-gray-100">
         <span className="sr-only">Delete</span>
         <TrashIcon className="w-5" />
@@ -37,3 +43,22 @@ export function DeleteInvoice({ id }: { id: string }) {
     </form>
   );
 }
+
+// export function DeleteInvoice({ id }: { id: string }) {
+//   function handleDelete(e: React.FormEvent) {
+//     e.preventDefault();
+//     if (confirm('삭제하시겠습니까?')) {
+//       deleteInvoice(id);
+//       alert('삭제되었습니다.');
+//     }
+//   }
+
+//   return (
+//     <form onSubmit={handleDelete}>
+//       <button type="submit" className="rounded-md border p-2 hover:bg-gray-100">
+//         <span className="sr-only">Delete</span>
+//         <TrashIcon className="w-5" />
+//       </button>
+//     </form>
+//   );
+// }
